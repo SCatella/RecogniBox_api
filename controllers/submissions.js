@@ -22,6 +22,7 @@ const handleSubmissions = (db) => (req, res) => {
             res.json(submissions[0]);
         })
         .catch(err => {
+            console.log(err);
             res.status(400).json('Unable to get entries');
         })
 }
