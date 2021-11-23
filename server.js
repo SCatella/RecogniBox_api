@@ -11,11 +11,8 @@ const profile = require('./controllers/profile');
 const db = knex({
   client: 'pg',
   connection: {
-    host : 'postgresql-vertical-81645',
-    port : 5432,
-    user : 'postgres',
-    password : '',
-    database : 'recognibox'
+    host : 'process.env.DATABASE_URL',
+    ssl: true
   }
 });
 
