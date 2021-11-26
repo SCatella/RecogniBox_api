@@ -22,10 +22,10 @@ const db = knex({
         password : 'Sc-0338374',
         database : 'recognibox',
     }
-  // connection: {
-  //   connectionString : process.env.DATABASE_URL,
-  //   ssl: true
-  // }
+  connection: {
+    connectionString : process.env.DATABASE_URL,
+    ssl: true
+  }
 });
 
 const app = express();
@@ -48,6 +48,6 @@ app.get('/profile/:id', profile.handleProfileGet(db));
 app.put('/submissions', submissions.handleSubmissions(db));
 app.post('/submissionsurl', submissions.handleApiCall());
 
-app.listen(serverPort, () => {
+app.listen(serverPort || 3000, () => {
     console.log(`App is running on port ${ serverPort }`);
 })
