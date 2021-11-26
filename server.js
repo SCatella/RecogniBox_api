@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const knex = require('knex');
 const signin = require('./controllers/signin');
@@ -10,12 +10,22 @@ const profile = require('./controllers/profile');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
+const serverPort = process.env.PORT;
+// const serverPort = 3000;
+
 const db = knex({
-  client: 'pg',
-  connection: {
-    connectionString : process.env.DATABASE_URL,
-    ssl: true
-  }
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1',
+        port : 5432,
+        user : 'postgres',
+        password : 'Sc-0338374',
+        database : 'recognibox',
+    }
+  // connection: {
+  //   connectionString : process.env.DATABASE_URL,
+  //   ssl: true
+  // }
 });
 
 const app = express();
@@ -38,6 +48,6 @@ app.get('/profile/:id', profile.handleProfileGet(db));
 app.put('/submissions', submissions.handleSubmissions(db));
 app.post('/submissionsurl', submissions.handleApiCall());
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log(`App is running on port ${ process.env.PORT }`);
+app.listen(serverPort, () => {
+    console.log(`App is running on port ${ serverPort }`);
 })
