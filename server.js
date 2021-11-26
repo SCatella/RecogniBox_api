@@ -15,17 +15,17 @@ const serverPort = process.env.PORT;
 
 const db = knex({
     client: 'pg',
+    // connection: {
+    //     host : '127.0.0.1',
+    //     port : 5432,
+    //     user : 'postgres',
+    //     password : '',
+    //     database : 'recognibox',
+    // }
     connection: {
-        host : '127.0.0.1',
-        port : 5432,
-        user : 'postgres',
-        password : 'Sc-0338374',
-        database : 'recognibox',
-    }
-  connection: {
     connectionString : process.env.DATABASE_URL,
     ssl: true
-  }
+    }
 });
 
 const app = express();
